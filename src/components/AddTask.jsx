@@ -1,8 +1,11 @@
 import { useState } from "react"
+import { useDispatch } from "react-redux"
+import { addtask } from "../features/boards/boards"
 
 const AddTask = () => {
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
+    const dispatch = useDispatch()
     console.log(title)
     console.log(description)
     return (
@@ -24,7 +27,7 @@ const AddTask = () => {
                     <label className="pl text-mediumgrey">Status</label>
                     <input placeholder="select"></input>
                 </div>
-                <button className="bg-darkpurple text-white py-2 w-full rounded-3xl"><p className="pl">Create Task</p></button>
+                <button onClick={() => dispatch(addtask({title: title, description: description}))} className="bg-darkpurple text-white py-2 w-full rounded-3xl"><p className="pl">Create Task</p></button>
             </div>
         </form>
     )

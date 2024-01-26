@@ -7,12 +7,12 @@ export const taskSlice = createSlice({
     name: 'task',
     initialState,
     reducers: {
-        test: (state) => {
-            return state
+        addtask: (state, action) => {
+            state.boards[0].columns[0].tasks.push({title: action.payload.title, description: action.payload.description})
           },
     }
 })
 
-export const { test } = taskSlice.actions
+export const { addtask } = taskSlice.actions
 
 export default taskSlice.reducer;
