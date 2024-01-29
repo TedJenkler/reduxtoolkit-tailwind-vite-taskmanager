@@ -9,6 +9,7 @@ export default {
       colors: {
         'darkpurple': '#635FC7',
         'lightpurple': '#A8A4FF',
+        'newpurple': '#8471F2',
         'black1': '#000112',
         'black2': '#20212C',
         'black3': '#2B2C37',
@@ -19,7 +20,8 @@ export default {
         'white': '#FFFFFF',
         'red': '#EA5555',
         'lightred': '#FF9898',
-        'turk': '#49C4E5'
+        'turk': '#49C4E5',
+        'newgreen': '#67E2AE'
       },
     },
   },

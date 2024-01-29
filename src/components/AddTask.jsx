@@ -4,7 +4,7 @@ import { addtask } from "../features/boards/boards"
 import { v4 as uuidv4 } from 'uuid'
 import ximg from "../assets/x.png"
 
-const AddTask = () => {
+const AddTask = ( {setToggleAdd, toggleAdd} ) => {
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
     const [newSubtask, setNewSubtask] = useState(
@@ -62,7 +62,7 @@ const AddTask = () => {
                     <label className="pl text-mediumgrey">Status</label>
                     <input placeholder="select"></input>
                 </div>
-                <button onClick={() => dispatch(addtask({title: title, description: description, subtasks: newSubtask}))} className="bg-darkpurple text-white py-2 w-full rounded-3xl"><p className="pl">Create Task</p></button>
+                <button onClick={() => dispatch(addtask({title: title, description: description, subtasks: newSubtask}), setToggleAdd(!toggleAdd))} className="bg-darkpurple text-white py-2 w-full rounded-3xl"><p className="pl">Create Task</p></button>
             </div>
         </form>
     )

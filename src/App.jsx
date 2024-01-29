@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import Nav from './components/Nav'
 import { useState } from "react"
 import AddTask from './components/AddTask'
+import Display from './components/Display'
 
 function App() {
   const test = useSelector((state) => state.board)
@@ -11,7 +12,8 @@ function App() {
   return (
     <>
       <Nav toggleAdd={toggleAdd} setToggleAdd={setToggleAdd} />
-      {toggleAdd === true ? <AddTask /> : null}
+      {toggleAdd === true ? <AddTask toggleAdd={toggleAdd} setToggleAdd={setToggleAdd} /> : null}
+      <Display />
     </>
   )
 }
