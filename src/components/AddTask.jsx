@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { addtask } from "../features/boards/boards"
 import { v4 as uuidv4 } from 'uuid'
 import ximg from "../assets/x.png"
@@ -13,6 +13,7 @@ const AddTask = ( {setToggleAdd, toggleAdd} ) => {
             {isCompleted: false, title: '', id: uuidv4()},
         ]
     )
+
     const onChange = (id, newValue) => {
         setNewSubtask((prevstate) => {
             const newState = [...prevstate]
@@ -25,9 +26,12 @@ const AddTask = ( {setToggleAdd, toggleAdd} ) => {
     const onDelete = (id) => {
         setNewSubtask( (perState) => perState.filter((el) => el.id !== id))
     }
+
     const dispatch = useDispatch()
-    console.log(title)
-    console.log(newSubtask)
+    const board = useSelector((state) => state.board.boards)
+    const columns = board.columns;
+    console.log(board[0].columns)
+
     return (
         <form onSubmit={(e) => {e.preventDefault()}} className="absolute w-11/12 bg-white mx-auto left-0 right-0 top-40 flex flex-col p-6">
             <h2 className="mb-6">Add New Task</h2>
@@ -54,13 +58,19 @@ const AddTask = ( {setToggleAdd, toggleAdd} ) => {
                 </div>
                 <button onClick={(e) => {
                     setNewSubtask( (state) => [
-                        ...state, 
+                        ...state,
                         {isCompleted: false, title: '', id: uuidv4()},
                     ])
                 }} className="bg-greywhite2 text-darkpurple py-2 w-full rounded-3xl mb-6"><p className="pl w-full">+ Add New Subtask</p></button>
                 <div className="flex flex-col mb-6">
                     <label className="pl text-mediumgrey">Status</label>
-                    <input placeholder="select"></input>
+                    <select placeholder="select">
+                        {board[0].columns.map((column) => {
+                            return (
+                                <option>{column.name}</option>
+                            )
+                        })}
+                    </select>
                 </div>
                 <button onClick={() => dispatch(addtask({title: title, description: description, subtasks: newSubtask}), setToggleAdd(!toggleAdd))} className="bg-darkpurple text-white py-2 w-full rounded-3xl"><p className="pl">Create Task</p></button>
             </div>
