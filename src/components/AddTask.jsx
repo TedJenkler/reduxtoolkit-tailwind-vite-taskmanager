@@ -13,6 +13,7 @@ const AddTask = ( {setToggleAdd, toggleAdd} ) => {
             {isCompleted: false, title: '', id: uuidv4()},
         ]
     )
+    const [status, setStatus] = useState(0)
 
     const onChange = (id, newValue) => {
         setNewSubtask((prevstate) => {
@@ -29,8 +30,20 @@ const AddTask = ( {setToggleAdd, toggleAdd} ) => {
 
     const dispatch = useDispatch()
     const board = useSelector((state) => state.board.boards)
-    const columns = board.columns;
-    console.log(board[0].columns)
+
+    const handleStatus = (e) => {
+            setStatus(e.target.value)
+            if(status === "Todo"){
+                setStatus(0)
+            }
+            else if(status === "Doing"){
+                setStatus(1)
+            }
+            else if(status === "Done"){
+                setStatus(2)
+            }
+            console.log(status)
+    }
 
     return (
         <form onSubmit={(e) => {e.preventDefault()}} className="absolute w-11/12 bg-white mx-auto left-0 right-0 top-40 flex flex-col p-6">
@@ -64,7 +77,7 @@ const AddTask = ( {setToggleAdd, toggleAdd} ) => {
                 }} className="bg-greywhite2 text-darkpurple py-2 w-full rounded-3xl mb-6"><p className="pl w-full">+ Add New Subtask</p></button>
                 <div className="flex flex-col mb-6">
                     <label className="pl text-mediumgrey">Status</label>
-                    <select placeholder="select">
+                    <select onChange={handleStatus} value={status} placeholder="select">
                         {board[0].columns.map((column) => {
                             return (
                                 <option>{column.name}</option>
